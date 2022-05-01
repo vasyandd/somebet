@@ -1,4 +1,4 @@
 package ru.spb.somebet.controller;
 
-public class EventController {
+public class LiveController {
 }

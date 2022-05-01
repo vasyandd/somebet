@@ -1,4 +1,7 @@
 package ru.spb.somebet.repository;
 
-public interface ResultRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import ru.spb.somebet.model.Result;
+
+public interface ResultRepository extends JpaRepository<Result, Long> {
 }
