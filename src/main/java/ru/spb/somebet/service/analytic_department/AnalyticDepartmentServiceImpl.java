@@ -23,9 +23,9 @@ public class AnalyticDepartmentServiceImpl implements AnalyticDepartmentService 
     private Collection<Bet> getAllBetsOfThisMatch(int fistTeamRating, int secondTeamRating) {
         List<Bet> list = new ArrayList<>();
         float[] coefficients = getCoefficients(fistTeamRating, secondTeamRating);
-        list.add(new Bet(null, coefficients[0], Bet.Type.WIN1TEAM, null, false, true));
-        list.add(new Bet(null, coefficients[1], Bet.Type.DRAW, null, false, true));
-        list.add(new Bet(null, coefficients[2], Bet.Type.WIN2TEAM, null, false, true));
+        list.add(new Bet(null, coefficients[0], Bet.Type.WIN1TEAM, null, true));
+        list.add(new Bet(null, coefficients[1], Bet.Type.DRAW, null, true));
+        list.add(new Bet(null, coefficients[2], Bet.Type.WIN2TEAM, null, true));
         return list;
     }
 

@@ -15,7 +15,6 @@ public class Bet {
     private Type type;
     private FutureMatch futureMatch;
     private boolean isSuccess;
-    private boolean isActive;
 
     public enum Type {
         WIN1TEAM,

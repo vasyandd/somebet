@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.spb.somebet.model.Bet;
-import ru.spb.somebet.model.FutureMatch;
 import ru.spb.somebet.service.user.UserService;
 
 import java.util.Collection;
@@ -19,7 +18,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Collection<Bet>> getAllBetsByUser(@PathVariable(name = "id") Long id) {
-        Collection<Bet> result = service.getBetsForUser(id);
+        Collection<Bet> result = service.findById(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

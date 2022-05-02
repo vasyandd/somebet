@@ -5,5 +5,7 @@ import ru.spb.somebet.model.Bet;
 import java.util.Collection;
 
 public interface UserService {
-    Collection<Bet> getBetsForUser(Long id);
+    Collection<Bet> findById(Long id);
+
+    void payUsersByWinBet(Bet bet);
 }

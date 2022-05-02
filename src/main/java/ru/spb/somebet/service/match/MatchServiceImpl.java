@@ -38,4 +38,9 @@ public class MatchServiceImpl implements MatchService {
     public Collection<FutureMatch> getMatchesByRegion(String region) {
         return repository.findByRegion(Region.of(region));
     }
+
+    @Override
+    public void deleteMatches(Collection<FutureMatch> matches) {
+        repository.deleteAll(matches);
+    }
 }

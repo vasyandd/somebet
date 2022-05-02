@@ -1,14 +1,13 @@
 package ru.spb.somebet.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import ru.spb.somebet.model.FutureMatch;
 import ru.spb.somebet.model.Region;
 
 import java.util.Collection;
 
-public interface MatchRepository extends CrudRepository<FutureMatch, Long> {
-
-    Collection<FutureMatch> findAll();
+public interface MatchRepository extends JpaRepository<FutureMatch, Long> {
 
     Collection<FutureMatch> findByRegion(Region region);
 }

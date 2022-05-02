@@ -12,4 +12,6 @@ public interface MatchService {
     void saveMatch(NewMatch match);
 
     Collection<FutureMatch> getMatchesByRegion(String region);
+
+    void deleteMatches(Collection<FutureMatch> matches);
 }

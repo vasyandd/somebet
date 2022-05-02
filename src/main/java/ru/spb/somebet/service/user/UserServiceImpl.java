@@ -2,6 +2,7 @@ package ru.spb.somebet.service.user;
 
 import org.springframework.stereotype.Component;
 import ru.spb.somebet.model.Bet;
+import ru.spb.somebet.model.User;
 import ru.spb.somebet.repository.UserRepository;
 
 import java.util.Collection;
@@ -15,7 +16,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<Bet> getBetsForUser(Long id) {
-        return repository.findBetsById(id);
+    public Collection<Bet> findById(Long id) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("fff"));
+        return user.getBets();
+    }
+
+    @Override
+    public void payUsersByWinBet(Bet bet) {
+
     }
 }

@@ -6,7 +6,6 @@ import ru.spb.somebet.model.User;
 import java.util.Collection;
 
 public interface ResultService {
-
-    Collection<Result> getResultsByUser(User user);
-    Collection<Result> getAllResultsB();
+    void saveResult(Result result);
+    Collection<Result> getAllResults();
 }
