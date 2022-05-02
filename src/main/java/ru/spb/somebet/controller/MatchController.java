@@ -23,7 +23,11 @@ public class MatchController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-
+    @GetMapping
+    public ResponseEntity<Collection<FutureMatch>> getFutureMatchesByRegion(@RequestAttribute String region) {
+        Collection<FutureMatch> result = matchService.getMatchesByRegion();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<?> saveMatch(@RequestBody NewMatch match) {

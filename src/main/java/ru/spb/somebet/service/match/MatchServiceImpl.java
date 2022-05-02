@@ -2,7 +2,9 @@ package ru.spb.somebet.service.match;
 
 import org.springframework.stereotype.Component;
 import ru.spb.somebet.dto.NewMatch;
+import ru.spb.somebet.model.Bet;
 import ru.spb.somebet.model.FutureMatch;
+import ru.spb.somebet.model.Region;
 import ru.spb.somebet.repository.MatchRepository;
 import ru.spb.somebet.service.analytic_department.AnalyticDepartmentService;
 
@@ -25,12 +27,15 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public void saveMatch(NewMatch match) {
-        FutureMatch futureMatch = analyticDepartment.addBetsOnEventAndGet(match);
+        Collection<Bet> bets = analyticDepartment.getBetsOnNewMatch(match);
+        FutureMatch futureMatch = new FutureMatch(null, match.getDescription(), match.getTeam1(), match.getTeam2(),
+                Region.of(match.getRegion()), bets, match.getStartDate());
+        bets.forEach(b -> b.setFutureMatch(futureMatch));
         repository.save(futureMatch);
     }
 
     @Override
-    public Collection<FutureMatch> getMatchesByUser(Long id) {
-        return null;
+    public Collection<FutureMatch> getMatchesByRegion(String region) {
+        return repository.findByRegion(Region.of(region));
     }
 }

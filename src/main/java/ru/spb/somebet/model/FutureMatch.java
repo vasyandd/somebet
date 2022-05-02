@@ -1,12 +1,16 @@
 package ru.spb.somebet.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class FutureMatch {
     private Long id;
     private String description;

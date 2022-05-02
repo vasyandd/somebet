@@ -11,5 +11,5 @@ public interface MatchService {
 
     void saveMatch(NewMatch match);
 
-    Collection<FutureMatch> getMatchesByUser(Long id);
+    Collection<FutureMatch> getMatchesByRegion(String region);
 }

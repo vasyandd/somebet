@@ -1,11 +1,15 @@
 package ru.spb.somebet.service.analytic_department;
 
 import ru.spb.somebet.dto.NewMatch;
+import ru.spb.somebet.model.Bet;
 import ru.spb.somebet.model.FutureMatch;
+import ru.spb.somebet.model.LiveMatch;
+
+import java.util.Collection;
 
 public interface AnalyticDepartmentService {
 
-    FutureMatch addBetsOnEventAndGet(NewMatch match);
+    Collection<Bet> getBetsOnNewMatch(NewMatch match);
 
-    FutureMatch checkBetsOnLiveEventAndGet(FutureMatch futureMatch);
+    LiveMatch checkBetsOnLiveMatchAndGet(LiveMatch match);
 }
