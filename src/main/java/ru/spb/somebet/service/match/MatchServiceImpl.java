@@ -28,7 +28,7 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public void saveMatch(NewMatch match) {
         Collection<Bet> bets = analyticDepartment.getBetsOnNewMatch(match);
-        FutureMatch futureMatch = new FutureMatch(null, match.getDescription(), match.getTeam1(), match.getTeam2(),
+        FutureMatch futureMatch = new FutureMatch(null, match.getDescription(), match.getTeams(),
                 Region.of(match.getRegion()), bets, match.getStartDate());
         bets.forEach(b -> b.setFutureMatch(futureMatch));
         repository.save(futureMatch);

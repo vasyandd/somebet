@@ -20,7 +20,7 @@ public class LiveMatch {
     private Collection<Bet> bets;
     private LocalDateTime startTime;
     private Collection<String> matchProgress = new ArrayList<>();
-    private byte[] score = new byte[2];
+    private int[] score = new int[2];
 
     public LiveMatch(FutureMatch match) {
         this(match.getDescription(), match.getTeams(), match.getRegion(),
@@ -41,7 +41,7 @@ public class LiveMatch {
         for (Bet oldBet : liveMatch.bets) {
             betsDto.add(new BetDto(oldBet.getValue(), oldBet.getType()));
         }
-        byte[] scoreForDto = Arrays.copyOf(liveMatch.score, 2);
+        int[] scoreForDto = Arrays.copyOf(liveMatch.score, 2);
         Collection<String> progressForDto = Collections.unmodifiableCollection(liveMatch.matchProgress);
         return new LiveMatchDto(liveMatch.description, liveMatch.getTeams(),
                 liveMatch.region, betsDto, liveMatch.getCurrentMinuteOfMatch(), progressForDto, scoreForDto);

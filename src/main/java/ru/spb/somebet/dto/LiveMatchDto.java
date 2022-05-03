@@ -20,5 +20,5 @@ public class LiveMatchDto {
     private final Collection<BetDto> bets;
     private final long currentMinute;
     private final Collection<String> matchProgress;
-    private final byte[] score;
+    private final int[] score;
 }

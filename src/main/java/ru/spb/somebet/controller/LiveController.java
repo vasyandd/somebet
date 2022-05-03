@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RestController;
 import ru.spb.somebet.dto.LiveMatchDto;
-import ru.spb.somebet.model.LiveMatch;
 import ru.spb.somebet.service.live.LiveMatchService;
-
 
 import java.util.Collection;
 

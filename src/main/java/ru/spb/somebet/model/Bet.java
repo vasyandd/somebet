@@ -1,10 +1,8 @@
 package ru.spb.somebet.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,11 +11,24 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@Entity
+@Table(name = "BETS")
 public class Bet {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private float value;
+
     private Type type;
+
+    @ManyToOne
+    @JoinColumn(name = "match_id")
+    @Column(nullable = false)
     private FutureMatch futureMatch;
+
     private boolean isSuccess;
 
     public enum Type {

@@ -24,15 +24,15 @@ public class AnalyticDepartmentServiceImpl implements AnalyticDepartmentService 
     private Collection<Bet> getAllBetsOfThisMatch(int fistTeamRating, int secondTeamRating) {
         List<Bet> list = new ArrayList<>();
         float[] coefficients = getInitialCoefficients(fistTeamRating, secondTeamRating);
-        list.add(new Bet(null, coefficients[0], Bet.Type.WIN1TEAM, null, true));
-        list.add(new Bet(null, coefficients[1], Bet.Type.DRAW, null, true));
-        list.add(new Bet(null, coefficients[2], Bet.Type.WIN2TEAM, null, true));
+        list.add(new Bet(null, coefficients[0], Bet.Type.WIN1TEAM, null, false));
+        list.add(new Bet(null, coefficients[1], Bet.Type.DRAW, null, false));
+        list.add(new Bet(null, coefficients[2], Bet.Type.WIN2TEAM, null, false));
         return list;
     }
 
     private float[] getInitialCoefficients(int fistTeamRating, int secondTeamRating) {
         // 33% - win firstTeam, 34% - draw, 33% - win secondTeam
-        int[] basePercent = new int[]{33, 34, 33};
+        int[] basePercent = new int[]{30,40,30};
         if (secondTeamRating != fistTeamRating) {
             int module = Math.abs(fistTeamRating - secondTeamRating);
             basePercent[0] += module;
@@ -98,7 +98,7 @@ public class AnalyticDepartmentServiceImpl implements AnalyticDepartmentService 
     private float[] mapPercentsToCoefficients(int[] percents) {
         float[] result = new float[3];
         for (int i = 0; i < result.length; i++) {
-            result[i] = 1 / (float) percents[i];
+            result[i] = 100 / (float) percents[i];
         }
         return result;
     }
