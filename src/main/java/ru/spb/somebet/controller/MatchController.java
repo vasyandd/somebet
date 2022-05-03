@@ -25,7 +25,7 @@ public class MatchController {
 
     @GetMapping
     public ResponseEntity<Collection<FutureMatch>> getFutureMatchesByRegion(@RequestAttribute String region) {
-        Collection<FutureMatch> result = matchService.getMatchesByRegion();
+        Collection<FutureMatch> result = matchService.getMatchesByRegion(region);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

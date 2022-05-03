@@ -11,5 +11,5 @@ public interface AnalyticDepartmentService {
 
     Collection<Bet> getBetsOnNewMatch(NewMatch match);
 
-    LiveMatch checkBetsOnLiveMatchAndGet(LiveMatch match);
+    LiveMatch updateBetsOnLiveMatchAndGet(LiveMatch match, int numberOfTeamThatHasScored);
 }

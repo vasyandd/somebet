@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class NewMatch {
     private String description;
-    private String team1;
-    private String team2;
+    private String[] teams = new String[2];
     private String region;
     private LocalDateTime startDate;
 }

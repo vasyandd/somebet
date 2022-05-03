@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RestController;
+import ru.spb.somebet.dto.LiveMatchDto;
 import ru.spb.somebet.model.LiveMatch;
 import ru.spb.somebet.service.live.LiveMatchService;
 
@@ -21,14 +22,14 @@ public class LiveController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<LiveMatch>> getAllLiveMatches() {
-        Collection<LiveMatch> matches = service.getAllLiveMatches();
+    public ResponseEntity<Collection<LiveMatchDto>> getAllLiveMatches() {
+        Collection<LiveMatchDto> matches = service.getAllLiveMatches();
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<Collection<LiveMatch>> getAllLiveMatchesByRegion(@RequestAttribute String region) {
-        Collection<LiveMatch> matches = service.getAllLiveMatchesByRegion(region);
+    public ResponseEntity<Collection<LiveMatchDto>> getAllLiveMatchesByRegion(@RequestAttribute String region) {
+        Collection<LiveMatchDto> matches = service.getAllLiveMatchesByRegion(region);
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 }

@@ -2,6 +2,7 @@ package ru.spb.somebet.service.live;
 
 import org.springframework.stereotype.Component;
 import ru.spb.somebet.cache.LiveMatchCache;
+import ru.spb.somebet.dto.LiveMatchDto;
 import ru.spb.somebet.model.LiveMatch;
 import ru.spb.somebet.model.Region;
 
@@ -17,13 +18,13 @@ public class LiveMatchServiceImpl implements LiveMatchService {
     }
 
     @Override
-    public Collection<LiveMatch> getAllLiveMatches() {
+    public Collection<LiveMatchDto> getAllLiveMatches() {
         return cache.getLiveMatches();
     }
 
     @Override
-    public Collection<LiveMatch> getAllLiveMatchesByRegion(String region) {
-        Collection<LiveMatch> matches = getAllLiveMatches();
+    public Collection<LiveMatchDto> getAllLiveMatchesByRegion(String region) {
+        Collection<LiveMatchDto> matches = getAllLiveMatches();
         return matches.stream()
                 .filter(m -> m.getRegion() == Region.of(region))
                 .collect(Collectors.toList());

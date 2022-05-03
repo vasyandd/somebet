@@ -16,7 +16,7 @@ public class Result {
     private Region region;
     private LocalDateTime endTime;
 
-    public Result(LiveMatch match, int currentMinute) {
+    public Result(LiveMatch match, long currentMinute) {
         this(null, match.getDescription(), match.getTeam1(), match.getTeam2(),
                 match.getRegion(), match.getStartTime().plusMinutes(currentMinute));
     }

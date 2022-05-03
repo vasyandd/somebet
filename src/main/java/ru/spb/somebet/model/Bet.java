@@ -5,6 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,5 +24,9 @@ public class Bet {
         WIN1TEAM,
         WIN2TEAM,
         DRAW
+    }
+
+    public static Map<Type, Bet> groupByType(Collection<Bet> bets) {
+        return bets.stream().collect(Collectors.toMap(b -> b.type, b -> b));
     }
 }
