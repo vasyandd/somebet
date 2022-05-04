@@ -5,8 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.spb.somebet.dto.FutureMatchDto;
 import ru.spb.somebet.dto.NewMatch;
-import ru.spb.somebet.model.FutureMatch;
+import ru.spb.somebet.model.Result;
 import ru.spb.somebet.service.match.MatchService;
+import ru.spb.somebet.service.result.ResultService;
 
 import java.util.Collection;
 
@@ -14,16 +15,26 @@ import java.util.Collection;
 @RequestMapping("/matches")
 public class MatchController {
     private final MatchService matchService;
+    private final ResultService resultService;
 
-    public MatchController(MatchService matchService) {
+    public MatchController(MatchService matchService, ResultService resultService) {
         this.matchService = matchService;
+        this.resultService = resultService;
     }
 
     @GetMapping
-    public ResponseEntity<Collection<FutureMatchDto>> getAllFutureMatches() {
-        Collection<FutureMatchDto> result = matchService.getMatches();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public ResponseEntity<Collection<FutureMatchDto>> getFutureMatches() {
+        Collection<FutureMatchDto> matches = matchService.getMatches();
+        return new ResponseEntity<>(matches, HttpStatus.OK);
     }
+
+    @GetMapping("/results")
+    public ResponseEntity<Collection<Result>> getResults() {
+        Collection<Result> results = resultService.getAllResults();
+        return new ResponseEntity<>(results, HttpStatus.OK);
+    }
+
+
 
 
     @PostMapping
