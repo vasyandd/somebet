@@ -3,6 +3,7 @@ package ru.spb.somebet.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import ru.spb.somebet.dto.BetDto;
 import ru.spb.somebet.dto.LiveMatchDto;
 
@@ -39,7 +40,7 @@ public class LiveMatch {
     public static LiveMatchDto modelToDto(LiveMatch liveMatch) {
         List<BetDto> betsDto = new ArrayList<>();
         for (Bet oldBet : liveMatch.bets) {
-            betsDto.add(new BetDto(oldBet.getValue(), oldBet.getType()));
+            betsDto.add(new BetDto(oldBet.getId(), oldBet.getValue(), oldBet.getType()));
         }
         int[] scoreForDto = Arrays.copyOf(liveMatch.score, 2);
         Collection<String> progressForDto = Collections.unmodifiableCollection(liveMatch.matchProgress);
@@ -47,11 +48,15 @@ public class LiveMatch {
                 liveMatch.region, betsDto, liveMatch.getCurrentMinuteOfMatch(), progressForDto, scoreForDto);
     }
 
+    public void goal(int numberTeam) {
+        score[numberTeam]++;
+    }
+
     public void addEvent(String event) {
         matchProgress.add(event);
     }
 
     public long getCurrentMinuteOfMatch() {
-        return ChronoUnit.MINUTES.between(LocalDateTime.now(), startTime);
+        return ChronoUnit.MINUTES.between(startTime, LocalDateTime.now());
     }
 }

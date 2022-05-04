@@ -3,6 +3,10 @@ package ru.spb.somebet.cache;
 import org.springframework.stereotype.Component;
 import ru.spb.somebet.dto.LiveMatchDto;
 import ru.spb.somebet.model.LiveMatch;
+import ru.spb.somebet.service.analytic_department.AnalyticDepartmentService;
+import ru.spb.somebet.service.match.MatchService;
+import ru.spb.somebet.service.payService.PayService;
+import ru.spb.somebet.service.result.ResultService;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -20,13 +24,25 @@ public class LiveMatchCacheImpl implements LiveMatchCache {
     private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final List<LiveMatch> liveMatches = new ArrayList<>();
+    private final AnalyticDepartmentService analyticDepartmentService;
+    private final MatchService matchService;
+    private final ResultService resultService;
+    private final PayService payService;
+
+    public LiveMatchCacheImpl(AnalyticDepartmentService analyticDepartmentService, MatchService matchService,
+                              ResultService resultService, PayService payService) {
+        this.analyticDepartmentService = analyticDepartmentService;
+        this.matchService = matchService;
+        this.resultService = resultService;
+        this.payService = payService;
+    }
 
     @PostConstruct
     public void initTasksAndAddToScheduledExecutor() {
-        Runnable fetchLiveMatchesFromRepository = new FetchLiveMatchesFromRepositoryTask(liveMatches, lock);
+        Runnable fetchLiveMatchesFromRepository = new FetchLiveMatchesFromRepositoryTask(liveMatches, lock, matchService);
         Runnable clearLiveMatchesListAndPutFinishedMatchesToRepository =
-                new ClearLiveMatchesListAndPutFinishedMatchesToRepositoryTask(liveMatches, lock);
-        Runnable goal = new GoalTask(liveMatches, lock);
+                new ClearLiveMatchesListAndPayUsersWinBetsTask(liveMatches, lock, resultService, payService);
+        Runnable goal = new GoalTask(liveMatches, lock, analyticDepartmentService);
         // someone scores a goal every 15 seconds
         executor.scheduleWithFixedDelay(goal, 15, 15, TimeUnit.SECONDS);
         // data is fetched from repository every minute

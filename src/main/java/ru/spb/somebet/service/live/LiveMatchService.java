@@ -7,8 +7,6 @@ import java.util.Collection;
 
 public interface LiveMatchService {
 
-    Collection<LiveMatchDto> getAllLiveMatches();
-
-    Collection<LiveMatchDto> getAllLiveMatchesByRegion(String region);
+    Collection<LiveMatchDto> getLiveMatches();
 
 }

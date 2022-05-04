@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,8 +21,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private Integer balance;
-    @ManyToMany
-    private Collection<Bet> bets;
+    private String login;
+    private String password;
+    private Float balance;
+    @ElementCollection
+    @CollectionTable(name = "USER_ACVTIVE_BETS", joinColumns = @JoinColumn(name = "user_id"))
+    @MapKeyJoinColumn(name = "bet_id")
+    @Column(name = "moneyOnBet")
+    private Map<Long, Float> bets = new HashMap<>();
+
+    public void addActiveBet(Bet bet, float value) {
+        bets.put(bet.getId(), value);
+    }
 }

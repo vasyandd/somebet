@@ -1,5 +1,6 @@
 package ru.spb.somebet.service.analytic_department;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.spb.somebet.dto.NewMatch;
 import ru.spb.somebet.model.Bet;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Slf4j
 @Component
 public class AnalyticDepartmentServiceImpl implements AnalyticDepartmentService {
 

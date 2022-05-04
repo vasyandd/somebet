@@ -26,7 +26,6 @@ public class Bet {
 
     @ManyToOne
     @JoinColumn(name = "match_id")
-    @Column(nullable = false)
     private FutureMatch futureMatch;
 
     private boolean isSuccess;

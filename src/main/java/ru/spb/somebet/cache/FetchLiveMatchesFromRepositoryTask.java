@@ -1,6 +1,5 @@
 package ru.spb.somebet.cache;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.spb.somebet.model.FutureMatch;
 import ru.spb.somebet.model.LiveMatch;
 import ru.spb.somebet.service.match.MatchService;
@@ -12,18 +11,18 @@ import java.util.concurrent.locks.ReadWriteLock;
 public class FetchLiveMatchesFromRepositoryTask implements Runnable {
     private final List<LiveMatch> liveMatches;
     private final ReadWriteLock lock;
-    @Autowired
-    private MatchService matchService;
+    private final MatchService matchService;
 
-    public FetchLiveMatchesFromRepositoryTask(List<LiveMatch> liveMatches, ReadWriteLock lock) {
+    public FetchLiveMatchesFromRepositoryTask(List<LiveMatch> liveMatches, ReadWriteLock lock, MatchService matchService) {
         this.liveMatches = liveMatches;
         this.lock = lock;
+        this.matchService = matchService;
     }
 
     @Override
     public void run() {
         lock.writeLock().lock();
-        Collection<FutureMatch> matches = matchService.getMatches();
+        Collection<FutureMatch> matches = matchService.getMatchesThatStartsNow();
         for (FutureMatch futureMatch : matches) {
             liveMatches.add(new LiveMatch(futureMatch));
         }
