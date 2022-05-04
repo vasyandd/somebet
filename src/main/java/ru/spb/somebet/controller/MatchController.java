@@ -12,7 +12,7 @@ import ru.spb.somebet.service.result.ResultService;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/matches")
+@RequestMapping("/all-matches")
 public class MatchController {
     private final MatchService matchService;
     private final ResultService resultService;
@@ -28,7 +28,7 @@ public class MatchController {
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
-    @GetMapping("/results")
+    @GetMapping("/result")
     public ResponseEntity<Collection<Result>> getResults() {
         Collection<Result> results = resultService.getAllResults();
         return new ResponseEntity<>(results, HttpStatus.OK);
